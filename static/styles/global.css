@@ -1,0 +1,9 @@
+.container-fluid.section {
+    background-color: rgba(170, 167, 167, 0.78);
+
+    min-height: 100vh;
+    max-height: 400vh;
+
+}
+
+

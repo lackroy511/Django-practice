@@ -1,0 +1,59 @@
+.row.title {
+    height: 11em;
+}
+
+.text-title {
+    text-align: center;
+    margin-top: 3em;
+    font-size: 1.4em;
+}
+
+.col.empty {
+    max-width: 10%;
+}
+
+.col.img>img {
+    height: 210px;
+    width: 150px;
+}
+
+.col-md-8 {
+    height: 210px;
+}
+
+.card.mb-3 {
+    margin-left: 17%;
+    margin-right: 17%;
+    border-color: #67676a;
+}
+
+@media (max-width: 840px) {
+    .col.img>img {
+        height: 240px;
+        width: 150px;
+    }
+    .col-md-8 {
+        height: 230px;
+    }
+    .col.empty {
+        display: none;
+    }
+}
+
+@media (max-width: 1300px) {
+    .card.mb-3 {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .col.empty {
+        max-width: 1%;
+    }
+}
+
+@media (max-width: 1920px){
+    .card.mb-3 {
+        margin-left: 10%;
+        margin-right: 10%;
+
+}
+}

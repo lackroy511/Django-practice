@@ -1,0 +1,33 @@
+
+.row.title {
+    height: 11em;
+}
+
+.text-title {
+    text-align: center;
+    margin-top: 3em;
+    font-size: 1.4em;
+}
+
+.card {
+    padding: 1em;
+    margin-inline: 7%;
+    border-color: #67676a;
+}
+
+.text {
+    margin-inline: 7%;
+
+}
+
+.text>p {
+    font-size: 1.2rem;
+}
+
+.input {
+    width: 1000px;
+}
+
+.form>text {
+    display: none;
+}
