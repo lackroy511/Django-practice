@@ -7,6 +7,14 @@ def index(request):
     return render(request, 'catalog/index.html')
 
 
+def category(request):
+    return render(request, 'catalog/category.html')
+
+
+def orders(request):
+    return render(request, 'catalog/orders.html')
+
+
 def contacts(request):
     if request.method == 'POST':
         print(request.POST.get('name'))
