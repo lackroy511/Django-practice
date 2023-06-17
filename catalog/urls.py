@@ -7,5 +7,4 @@ urlpatterns = [
     path('category', category),
     path('orders', orders),
     path('contacts', contacts),
-
 ]
