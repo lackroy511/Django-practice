@@ -1,105 +1,133 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/styles/nav-bar.css">
     <link rel="stylesheet" href="/static/styles/global.css">
     <link rel="stylesheet" href="/static/styles/contacts.css">
     <title>Document</title>
+    <style>
+        .data {
+            text-align: center;
+            margin-top: 3em;
+            font-size: 1.4em;
+            margin: 0;
+        }
+    </style>
+
 </head>
+
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">LOGO</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">LOGO</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/category">Категории</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/orders">Заказы</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/contacts">Контакты</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-
-<section>
-    <div class="container-fluid section">
-
-        <div class="row title">
-            <div class="text-title">
-                <h1>Контакты</h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col form">
-
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="card">
-                        <div class="mb-3">
-                            <label class="form-label">Имя</label>
-                            <input class="form-control" type="text" placeholder="Имя"
-                                   aria-label="default input example" name="name">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Почта</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
-                                   placeholder="name@mail.com" name="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Сообщение</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <input class="btn btn-primary" type="submit" value="Отправить"/>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-            <div class="col">
-                <div class="text">
-                    <h2>Наши контакты</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet atque consequuntur deserunt
-                        dolore eius illo incidunt inventore libero magnam, nihil porro praesentium, quam quod vel, velit
-                        veniam? Sapiente, tempore?</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid animi, commodi
-                        deleniti eos, eum exercitationem facere illum, laudantium nobis nulla obcaecati quam quas quo
-                        ratione repellat suscipit veritatis voluptatum!</p>
-                    <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error fugiat impedit itaque iusto
-                        maiores minima nesciunt, perferendis quaerat. Ab autem eum, itaque modi nostrum omnis
-                        perspiciatis provident quae totam voluptatum.</P>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/categories">Категории</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/orders">Заказы</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/contacts">Контакты</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </nav>
+    </header>
+
+
+    <section>
+        <div class="container-fluid section">
+
+            <div class="row title">
+                <div class="text-title">
+                    <h1>Контакты</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form">
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="card">
+                            <div class="mb-3">
+                                <label class="form-label">Имя</label>
+                                <input class="form-control" type="text" placeholder="Имя"
+                                    aria-label="default input example" name="name">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Почта</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="name@mail.com" name="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Сообщение</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    name="text"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <input class="btn btn-primary" type="submit" value="Отправить" />
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="col">
+                    <div class="text">
+                        <h2>Наши контакты</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet atque consequuntur deserunt
+                            dolore eius illo incidunt inventore libero magnam, nihil porro praesentium, quam quod vel,
+                            velit
+                            veniam? Sapiente, tempore?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid animi, commodi
+                            deleniti eos, eum exercitationem facere illum, laudantium nobis nulla obcaecati quam quas
+                            quo
+                            ratione repellat suscipit veritatis voluptatum!</p>
+                        <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error fugiat impedit itaque iusto
+                            maiores minima nesciunt, perferendis quaerat. Ab autem eum, itaque modi nostrum omnis
+                            perspiciatis provident quae totam voluptatum.</P>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="data">
+                    <p>Имя: {{ name }}</p>
+                    <p>Email: {{ email }}</p>
+                    <p>Massage: {{ massage }}</p>
+                </div>
+            </div>
+
         </div>
-    </div>
-</section>
 
 
-<footer>
 
-</footer>
-<script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    </section>
+
+
+    <footer>
+
+    </footer>
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -1,10 +1,10 @@
 from django.urls import path
 
-from catalog.views import contacts, index, category, orders
+from catalog.views import contacts, index, categories, orders
 
 urlpatterns = [
     path('', index),
-    path('category/', category),
+    path('categories/', categories),
     path('orders/', orders),
     path('contacts/', contacts),
 ]

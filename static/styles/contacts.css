@@ -9,6 +9,12 @@
     font-size: 1.4em;
 }
 
+.data {
+    text-align: center;
+    margin-top: 3em;
+    font-size: 1.4em;
+}
+
 .card {
     padding: 1em;
     margin-inline: 7%;
