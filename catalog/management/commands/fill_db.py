@@ -5,7 +5,7 @@ from catalog.models import Product, Category
 
 import json
 
-
+# Заполняет таблицы данными из фикстуры.
 class Command(BaseCommand):
 
     def handle(self, *args, **options) -> None:
