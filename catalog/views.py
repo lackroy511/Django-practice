@@ -6,11 +6,11 @@ from catalog.models import Product, Contact
 
 
 def index(request):
-    
+
     products = Product.objects.all()[0:4]
-    
+
     print(products)
-    
+
     return render(request, 'catalog/index.html')
 
 
@@ -28,13 +28,13 @@ def contacts(request):
         email = request.POST.get('email')
         massage = request.POST.get('text')
         Contact.objects.create(name=name, email=email, massage=massage)
-        
+
         data = {
             'name': name,
             'email': email,
             'massage': massage
         }
-        
+
         return render(request, 'catalog/contacts.html', context=data)
 
     return render(request, 'catalog/contacts.html')

@@ -6,12 +6,10 @@ from catalog.models import Product, Category
 import json
 
 
-
-
 class Command(BaseCommand):
-    
+
     def handle(self, *args, **options) -> None:
-        
+
         path = 'catalog_data.json'
         data = json_reader(path)
 
@@ -25,7 +23,7 @@ class Command(BaseCommand):
                                        creation_date=item["fields"]["creation_date"],
                                        update_date=item["fields"]["update_date"]
                                        )
-            
+
             elif item["model"] == "catalog.category":
                 Category.objects.create(name=item["fields"]["name"],
                                         description=item["fields"]["description"]

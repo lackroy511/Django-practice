@@ -3,6 +3,7 @@
     height: 11em;
 }
 
+
 .text-title {
     text-align: center;
     margin-top: 3em;
@@ -13,12 +14,15 @@
     text-align: center;
     margin-top: 3em;
     font-size: 1.4em;
+    margin: 0;
+    background-color: #67676a60;
+    
 }
 
 .card {
     padding: 1em;
     margin-inline: 7%;
-    border-color: #67676a;
+    border-color: #273136;
 }
 
 .text {
