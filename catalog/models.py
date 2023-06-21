@@ -6,14 +6,14 @@ from django.db import models
 class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name='имя')
     description = models.TextField(verbose_name='описание')
-    image_preview = models.ImageField(
-        upload_to='image_preview/', null=True, blank=True)
+    image_preview = models.ImageField(upload_to='image_preview/', 
+                                      null=True, blank=True)
     category = models.BigIntegerField(verbose_name='id категории')
     price = models.IntegerField(verbose_name='цена')
-    creation_date = models.DateTimeField(
-        auto_now_add=True, verbose_name='дата создания', null=True, blank=True)
-    update_date = models.DateField(
-        auto_now=True, verbose_name='дата изменения')
+    creation_date = models.DateTimeField(auto_now_add=True, verbose_name='дата создания', 
+                                         null=True, blank=True)
+    update_date = models.DateField(auto_now=True, 
+                                   verbose_name='дата изменения')
 
     def __str__(self):
         return f'Имя: {self.name}, Цена: {self.price}'
