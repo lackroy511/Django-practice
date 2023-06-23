@@ -7,34 +7,53 @@ from catalog.models import Product, Contact
 
 def index(request):
 
-    products = Product.objects.all()[0:4]
+    products = Product.objects.all()[0:3]
+    
+    context = {
+        'products': products,
+        'is_active_main': 'active'
+    }
 
-    print(products)
-
-    return render(request, 'catalog/index.html')
+    return render(request, 'catalog/index.html', context=context)
 
 
 def categories(request):
-    return render(request, 'catalog/category.html')
+    
+    context = {
+        'is_active_categories': 'active'
+    }
+    
+    return render(request, 'catalog/categories.html', context=context)
 
 
 def orders(request):
-    return render(request, 'catalog/orders.html')
+    
+    context = {
+        'is_active_orders': 'active'
+    }
+    
+    return render(request, 'catalog/orders.html', context=context)
 
 
 def contacts(request):
+    
+    context = {
+        'is_active_contacts': 'active'
+    }
+    
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
         massage = request.POST.get('text')
         Contact.objects.create(name=name, email=email, massage=massage)
 
-        data = {
+        context = {
             'name': name,
             'email': email,
-            'massage': massage
+            'massage': massage,
+            'is_active': 'active_contacts'
         }
 
-        return render(request, 'catalog/contacts.html', context=data)
+        return render(request, 'catalog/contacts.html', context=context)
 
-    return render(request, 'catalog/contacts.html')
+    return render(request, 'catalog/contacts.html', context=context)

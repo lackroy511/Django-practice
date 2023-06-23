@@ -8,6 +8,7 @@
     text-align: center;
     margin-top: 3em;
     font-size: 1.4em;
+    color: #dadddd;
 }
 
 .data {
@@ -15,7 +16,8 @@
     margin-top: 3em;
     font-size: 1.4em;
     margin: 0;
-    background-color: #67676a60;
+    color: #dadddd;
+    
     
 }
 
@@ -27,6 +29,7 @@
 
 .text {
     margin-inline: 7%;
+    color: #dadddd;
 
 }
 
@@ -41,3 +44,4 @@
 .form>text {
     display: none;
 }
+

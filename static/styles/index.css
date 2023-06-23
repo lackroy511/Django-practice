@@ -1,5 +1,5 @@
-.row.title {
-    height: 14em;
+.row.title-main {
+    height: 18em;
 }
 
 .text-title {
@@ -10,7 +10,7 @@
 
 .card-body.text-success {
     display: block;
-    height: 10em;
+    height: 10.5em;
 
 }
 
@@ -20,18 +20,27 @@
 
 }
 
+.col-xxl-4.col-xl-6.col-lg-6.col-md-6.col-sm-12 {
+    padding-inline: 2%;
+}
+
 .card-body.text-success {
     color: #4a4e54 !important;
 }
 
 .card.border-success.mb-3 {
-    min-width: 18rem;
-    margin-inline: 4.2em;
+    min-width: 22rem;
+    /* margin-left: 18%; */
 }
 
 .card-header.bg-transparent.border-success{
     border-color: #67676a !important;
 }
+
+/* .row {
+    margin-inline: 7%;
+} */
+
 
 @media (max-width: 1380px) {
     .card.border-success.mb-3 {
