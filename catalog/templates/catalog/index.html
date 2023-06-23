@@ -1,8 +1,8 @@
 {% extends 'catalog/base.html' %}
 
+{% load static %}
+
 {% block content %}
-
-
 <div class="row title-main">
     <div class="text-title">
         <h1>Главная</h1>
@@ -10,25 +10,32 @@
     </div>
 </div>
 
-<div class="row align-items-center">
+<div class="row">
     {% for product in products %}
-        <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-            <div class="card border-success mb-3" style="max-width: 18rem;">
-                <div class="card-header bg-transparent border-success">{{ product.name }}</div>
-                <div class="card-body text-success">
-                    <h5 class="card-title">$ 100</h5>
-                    <p class="card-text">{{ product.description }}</p>
+    <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col img">
+                    <img src="/static/images/test-img.png" class="img-fluid rounded-start" alt="...">
                 </div>
-                <div class="card-footer bg-transparent border-success"><a href="#"
-                        class="btn btn-primary">Купить</a></div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }} Lorem ipsum dolor, sit amet consectetur
+                            adipisicing elit. Reiciendis beatae quasi amet ab quaerat, aut labore iusto velit.
+                            Voluptatum fugit culpa vel, consectetur hic quasi nemo illum minus recusandae blanditiis</p>
+
+                    </div>
+                    <div class="button">
+                
+                        <a class="detail" type="submit" href={% url 'catalog:product' product.pk %}><p>Подробнее...</p></a>
+                            
+                        
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
     {% endfor %}
 </div>
-
-
-
 {% endblock %}
-
-
-
