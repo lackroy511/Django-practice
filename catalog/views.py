@@ -17,10 +17,15 @@ def index(request):
         Product.objects.create(
             name=request.POST.get('name'),
             description=request.POST.get('description'),
-            image_preview=request.POST.get('image_preview'),
+            
+            image_preview=request.FILES,
+            
             price=int(request.POST.get('price')),
             category=int(request.POST.get('category'))
         )
+        
+        print(request.FILES)
+        
         return render(request, 'catalog/index.html', context=context)
     
     return render(request, 'catalog/index.html', context=context)
