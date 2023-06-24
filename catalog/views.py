@@ -18,13 +18,13 @@ def index(request):
             name=request.POST.get('name'),
             description=request.POST.get('description'),
             
-            image_preview=request.FILES,
+            image_preview=None,         # <------------------- Вот оно, не работает
             
             price=int(request.POST.get('price')),
             category=int(request.POST.get('category'))
         )
         
-        print(request.FILES)
+        print(request.FILES) # <------------------- Вот оно, не работает
         
         return render(request, 'catalog/index.html', context=context)
     
