@@ -1,5 +1,6 @@
 {% extends 'catalog/base.html' %}
 
+{% load character_limit %}
 {% load static %}
 
 {% block content %}
@@ -21,9 +22,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description }} Lorem ipsum dolor, sit amet consectetur
-                            adipisicing elit. Reiciendis beatae quasi amet ab quaerat, aut labore iusto velit.
-                            Voluptatum fugit culpa vel, consectetur hic quasi nemo illum minus recusandae blanditiis</p>
+                        <p class="card-text">{{ product.description | character_limit }} </p>
 
                     </div>
                     <div class="button">
