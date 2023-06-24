@@ -12,6 +12,17 @@ def index(request):
         'products': products,
         'is_active_main': 'active'
     }
+    
+    if request.method == 'POST':
+        Product.objects.create(
+            name=request.POST.get('name'),
+            description=request.POST.get('description'),
+            image_preview=request.POST.get('image_preview'),
+            price=int(request.POST.get('price')),
+            category=int(request.POST.get('category'))
+        )
+        return render(request, 'catalog/index.html', context=context)
+    
     return render(request, 'catalog/index.html', context=context)
 
 
@@ -55,6 +66,7 @@ def contacts(request):
     context = {
         'is_active_contacts': 'active'
     }
+    
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
