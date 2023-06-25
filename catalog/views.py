@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from catalog.models import Product, Contact
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
@@ -12,29 +13,26 @@ def index(request):
         'products': products,
         'is_active_main': 'active'
     }
-    
+
     if request.method == 'POST':
+
         Product.objects.create(
             name=request.POST.get('name'),
             description=request.POST.get('description'),
-            
-            image_preview=None,         # <------------------- Вот оно, не работает
-            
+    
             price=int(request.POST.get('price')),
             category=int(request.POST.get('category'))
         )
-        
-        print(request.FILES) # <------------------- Вот оно, не работает
-        
+
         return render(request, 'catalog/index.html', context=context)
-    
+
     return render(request, 'catalog/index.html', context=context)
 
 
 def product(request, pk):
-    
+
     item = Product.objects.get(pk=pk)
-    
+
     context = {
         'name': item.name,
         'description': item.description,
@@ -43,15 +41,14 @@ def product(request, pk):
         'price': item.price,
         'creation_date': item.creation_date,
         'update_date': item.update_date,
-         
+
     }
-    
+
     return render(request, 'catalog/product.html', context=context)
 
 
-
 def categories(request):
-    
+
     context = {
         'is_active_categories': 'active'
     }
@@ -59,7 +56,7 @@ def categories(request):
 
 
 def orders(request):
-    
+
     context = {
         'is_active_orders': 'active'
     }
@@ -67,11 +64,11 @@ def orders(request):
 
 
 def contacts(request):
-    
+
     context = {
         'is_active_contacts': 'active'
     }
-    
+
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
