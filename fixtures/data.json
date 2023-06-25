@@ -1,80 +1,80 @@
 [
     {
         "model": "catalog.product",
-        "pk": 14,
-        "fields": {
-            "name": "Имя 2",
-            "description": "Описание 2:  Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?",
-            "image_preview": "image_preview/qwe_9038e91.png",
-            "category": 2,
-            "price": 45,
-            "creation_date": "2023-06-23T13:28:30.769Z",
-            "update_date": "2023-06-24"
-        }
-    },
-    {
-        "model": "catalog.product",
-        "pk": 15,
-        "fields": {
-            "name": "Имя 4",
-            "description": "Описание 3: Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?",
-            "image_preview": "image_preview/qwe_6oNf3O4.png",
-            "category": 3,
-            "price": 441,
-            "creation_date": "2023-06-23T13:28:42.125Z",
-            "update_date": "2023-06-24"
-        }
-    },
-    {
-        "model": "catalog.product",
-        "pk": 16,
+        "pk": 20,
         "fields": {
             "name": "Имя 1",
-            "description": "Описание 1: Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?",
+            "description": "Описание 1: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, consequatur possimus. Debitis, nulla. Deserunt expedita laboriosam officiis odio! Repellat a maiores adipisci rerum sed vero est porro rem ipsa assumenda?",
             "image_preview": "image_preview/qwe.png",
-            "category": 23,
-            "price": 11,
-            "creation_date": "2023-06-23T13:28:53.284Z",
-            "update_date": "2023-06-24"
+            "category": 32,
+            "price": 23,
+            "creation_date": "2023-06-25T05:15:17.774Z",
+            "update_date": "2023-06-25"
         }
     },
     {
         "model": "catalog.product",
-        "pk": 17,
+        "pk": 21,
         "fields": {
-            "name": "ИМЯ 3",
-            "description": "Описание 4: Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?",
-            "image_preview": "image_preview/qwe_KWHDpiZ.png",
-            "category": 4,
-            "price": 332,
-            "creation_date": "2023-06-24T06:10:45.969Z",
-            "update_date": "2023-06-24"
+            "name": "Имя 3",
+            "description": "Описание 1: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, consequatur possimus. Debitis, nulla. Deserunt expedita laboriosam officiis odio! Repellat a maiores adipisci rerum sed vero est porro rem ipsa assumenda?",
+            "image_preview": "image_preview/qwe_7PVZNeW.png",
+            "category": 345,
+            "price": 234,
+            "creation_date": "2023-06-25T05:16:41.653Z",
+            "update_date": "2023-06-25"
         }
     },
     {
         "model": "catalog.product",
-        "pk": 18,
+        "pk": 22,
+        "fields": {
+            "name": "Имя 2",
+            "description": "Описание 3: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, consequatur possimus. Debitis, nulla. Deserunt expedita laboriosam officiis odio! Repellat a maiores adipisci rerum sed vero est porro rem ipsa assumenda?",
+            "image_preview": "image_preview/qwe_Vz6XMyh.png",
+            "category": 545,
+            "price": 234,
+            "creation_date": "2023-06-25T05:16:55.283Z",
+            "update_date": "2023-06-25"
+        }
+    },
+    {
+        "model": "catalog.product",
+        "pk": 23,
+        "fields": {
+            "name": "Имя 4",
+            "description": "Описание 4: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, consequatur possimus. Debitis, nulla. Deserunt expedita laboriosam officiis odio! Repellat a maiores adipisci rerum sed vero est porro rem ipsa assumenda?",
+            "image_preview": "image_preview/qwe_7oe5V9s.png",
+            "category": 54,
+            "price": 64,
+            "creation_date": "2023-06-25T05:17:55.171Z",
+            "update_date": "2023-06-25"
+        }
+    },
+    {
+        "model": "catalog.product",
+        "pk": 24,
         "fields": {
             "name": "Имя 5",
-            "description": "Описание 2: Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?",
-            "image_preview": "image_preview/qwe_HFOLDbp.png",
-            "category": 34,
-            "price": 475,
-            "creation_date": "2023-06-24T06:11:16.112Z",
-            "update_date": "2023-06-24"
+            "description": "Описание 5: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, consequatur possimus. Debitis, nulla. Deserunt expedita laboriosam officiis odio! Repellat a maiores adipisci rerum sed vero est porro rem ipsa assumenda?",
+            "image_preview": "image_preview/qwe_c0TJPCs.png",
+            "category": 45,
+            "price": 457,
+            "creation_date": "2023-06-25T05:18:08.569Z",
+            "update_date": "2023-06-25"
         }
     },
     {
         "model": "catalog.product",
-        "pk": 19,
+        "pk": 25,
         "fields": {
             "name": "Имя 6",
-            "description": "Описание 2: Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?",
-            "image_preview": "image_preview/qwe_ySu7XXP.png",
-            "category": 86,
-            "price": 567,
-            "creation_date": "2023-06-24T06:12:00.581Z",
-            "update_date": "2023-06-24"
+            "description": "4534",
+            "image_preview": "image_preview/qwe_5tt4jiY.png",
+            "category": 345,
+            "price": 842,
+            "creation_date": "2023-06-25T05:18:32.117Z",
+            "update_date": "2023-06-25"
         }
     }
 ]
