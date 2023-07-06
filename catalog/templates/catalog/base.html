@@ -12,7 +12,7 @@
     <link rel="stylesheet" href={% static 'styles/index.css' %}>
     <link rel="stylesheet" href={% static 'styles/contacts.css' %}>
     <link rel="stylesheet" href={% static 'styles/categories.css' %}>
-    <link rel="stylesheet" href={% static 'styles/product_details.css' %}>
+    <link rel="stylesheet" href={% static 'styles/product_detail.css' %}>
     <title>Document</title>
 </head>
 <body>
@@ -32,13 +32,13 @@
                         <a class="nav-link {{ is_active_main }}" aria-current="page" href={% url 'catalog:index' %}>Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ is_active_categories }}" aria-current="page" href={% url 'catalog:categories' %}>Категории</a>
+                        <a class="nav-link {{ is_active_categories }}" aria-current="page" href="#">Категории</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ is_active_orders }}" href={% url 'catalog:orders' %}>Заказы</a>
+                        <a class="nav-link {{ is_active_orders }}" href="#">Заказы</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ is_active_contacts }}" href={% url 'catalog:contacts' %}>Контакты</a>
+                        <a class="nav-link {{ is_active_contacts }}" href={% url 'catalog:contact' %}>Контакты</a>
                     </li>
                 </ul>
             </div>

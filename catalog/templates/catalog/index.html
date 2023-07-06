@@ -2,6 +2,7 @@
 
 {% load character_limit %}
 {% load static %}
+{% load format_path_to_image %}
 
 {% block content %}
 <div class="row title-main">
@@ -12,22 +13,27 @@
 </div>
 
 <div class="row">
-    {% for product in products %}
+
+    <div class="col-12 mb-3">
+        <a class="btn btn-secondary" href={% url 'catalog:create_product' %}>Добавить продукт</a>
+    </div>
+
+    {% for object in object_list %}
     <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6 col-sm-12">
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col img">
-                    <img src="/static/images/test-img.png" class="img-fluid rounded-start" alt="...">
+                    <img src={{ object.image_preview | format_path_to_image }} class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description | character_limit }} </p>
+                        <h5 class="card-title">{{ object.name }}</h5>
+                        <p class="card-text">{{ object.description | character_limit }} </p>
 
                     </div>
                     <div class="button">
                 
-                        <a class="detail" type="submit" href={% url 'catalog:product' product.pk %}><p>Подробнее...</p></a>
+                        <a class="detail" type="submit" href={% url 'catalog:product' object.pk %}><p>Подробнее...</p></a>
                             
                         
                     </div>
@@ -36,45 +42,6 @@
         </div>
     </div>
     {% endfor %}
-</div>
-
-<div class="row add">
-    <div class="col">
-        
-        <h2>Добавить продукт</h2>
-
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="card input">
-
-                <div class="mb-2">
-                    <!-- <label class="form-label">Имя</label> -->
-                    <input class="form-control form-control-sm" name="name" type="text" placeholder="Имя" default="Имя"  aria-label=".form-control-sm example" required>
-                </div>
-
-                <div class="mb-2">
-                    <!-- <label for="exampleFormControlInput1" class="form-label">Стоимость</label> -->
-                    <input class="form-control form-control-sm" name="price" type="text" placeholder="Стоимость" default="0" aria-label=".form-control-sm example" required>
-                </div>
-
-                <select class="form-select form-select-sm mb-2" name="category" aria-label="Категория">
-                    <option value="0">Выберите категорию</option>
-                    <option value="1">Категория 1</option>
-                    <option value="2">Категория 2</option>
-                    <option value="3">Категория 3</option>
-                </select>
-   
-                <div class="mb-2">
-                    <label for="exampleFormControlTextarea1" class="form-label">Описание</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" default="Описание" rows="1" name="description" required>...</textarea>
-                </div>
-
-                <div class="mb-1">
-                    <input class="btn btn-primary" type="submit" value="Отправить" />
-                </div>
-            </div>
-        </form>
-    </div>
 </div>
 
 {% endblock %}

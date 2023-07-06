@@ -10,8 +10,8 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
 
-            {% if image_preview %}
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src={{ image_preview | format_path_to_image }}
+            {% if object.image_preview %}
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src={{ object.image_preview | format_path_to_image }}
                     alt="..." /></div>
             {% else %}
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
@@ -19,16 +19,17 @@
             {% endif %}
 
             <div class="col-md-6">
-                <h1 class="display-5 fw-bolder">{{ name }}</h1>
+                <h1 class="display-5 fw-bolder">{{ object.name }}</h1>
+                <a class="btn btn-outline-light flex-shrink-0 mb-3" href={% url 'catalog:update_product' object.pk %}>Изменить</a>
                 <div class="fs-5 mb-5">
-                    <span class="text-decoration-line-through">${{ price }}</span>
+                    <span class="text-decoration-line-through">${{ object.price }}</span>
                     <span> | $ Three Hundred Bucks</span>
                 </div>
 
-                <p class="lead"> {{ description }} </p>
-                <p class="lead">Дата создания: {{ creation_date }}</p>
-                <p class="lead">Дата обновления: {{ update_date }}</p>
-                <p> Путь до картинки: {{ image_preview | format_path_to_image }} </p>
+                <p class="lead"> {{ object.description }} </p>
+                <p class="lead">Дата создания: {{ object.creation_date }}</p>
+                <p class="lead">Дата обновления: {{ object.update_date }}</p>
+                <p> Путь до картинки: {{ object.image_preview | format_path_to_image }} </p>
 
                 <div class="d-flex">
                     <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"

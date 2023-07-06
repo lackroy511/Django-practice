@@ -12,6 +12,14 @@
     padding-inline: 2%;
 }
 
+.btn.btn-secondary {
+    text-align: center;
+    display: flex;
+    width: 10.56rem;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
 
 .button {
     display: flex;
@@ -36,12 +44,13 @@
 } 
 
 .card.input {
-    width: 25rem;
+    width: 27rem;
     margin: 4em;
     margin-left: auto;
     margin-right: auto;
 
 }
+
 
 @media (max-width: 840px){
     .row.g-0 {
