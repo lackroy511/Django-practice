@@ -10,6 +10,9 @@ from django.core.files.storage import FileSystemStorage
 class ProductListView(ListView):
     model = Product
     template_name = 'catalog/index.html'
+    extra_context = {
+        'is_active_main': 'active'
+    }
 
 
 class ProductDetailView(DetailView):
@@ -20,6 +23,9 @@ class ContactCreateView(CreateView):
     model = Contact
     fields = ('name', 'email', 'massage', ) 
     success_url = reverse_lazy('catalog:contact')
+    extra_context = {
+        'is_active_contact': 'active'
+    }
 
 
 class ProductCreateView(CreateView):

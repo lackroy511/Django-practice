@@ -1,0 +1,21 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<div class="container-xxl">
+    <div class="row">
+        <div class="col">
+            <div class="card m-4">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-warning" type="submit">Удалить</button>
+                        <a class="btn btn-primary blog m-2" href={% url 'blog:entry_detail' object.pk %}>отмена</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

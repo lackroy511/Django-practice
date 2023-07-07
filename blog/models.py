@@ -4,9 +4,9 @@ from django.db import models
 
 class BlogEntry(models.Model):
     header = models.CharField(max_length=150, verbose_name='заголовок')
-    slug = models.CharField(max_length=180, verbose_name='слаг')
+    slug = models.CharField(max_length=180, verbose_name='слаг', null=True, blank=True)
     content = models.TextField(verbose_name='контент')
-    image_preview = models.ImageField(upload_to='blog_image_preview/', null=True, blank=True)
+    image_preview = models.ImageField(upload_to='blog_image_preview/', null=True, blank=True, verbose_name='Превью')
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name='дата создания', 
                                          null=True, blank=True)
     is_publish = models.BooleanField(default=True, verbose_name='дата создания')

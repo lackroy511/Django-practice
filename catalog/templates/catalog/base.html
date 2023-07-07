@@ -13,6 +13,8 @@
     <link rel="stylesheet" href={% static 'styles/contacts.css' %}>
     <link rel="stylesheet" href={% static 'styles/categories.css' %}>
     <link rel="stylesheet" href={% static 'styles/product_detail.css' %}>
+    <link rel="stylesheet" href={% static 'styles/blogentry_list.css' %}>
+    <link rel="stylesheet" href={% static 'styles/blogentry_form.css' %}>
     <title>Document</title>
 </head>
 <body>
@@ -35,10 +37,10 @@
                         <a class="nav-link {{ is_active_categories }}" aria-current="page" href="#">Категории</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ is_active_orders }}" href="#">Заказы</a>
+                        <a class="nav-link {{ is_active_blog }}" href={% url 'blog:blog' %}>Блог</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ is_active_contacts }}" href={% url 'catalog:contact' %}>Контакты</a>
+                        <a class="nav-link {{ is_active_contact }}" href={% url 'catalog:contact' %}>Контакты</a>
                     </li>
                 </ul>
             </div>

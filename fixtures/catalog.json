@@ -6,10 +6,10 @@
             "name": "Имя 1",
             "description": "Описание 1: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, consequatur possimus. Debitis, nulla. Deserunt expedita laboriosam officiis odio! Repellat a maiores adipisci rerum sed vero est porro rem ipsa assumenda?",
             "image_preview": "image_preview/qwe.png",
-            "category": 32,
+            "category": 36,
             "price": 23,
             "creation_date": "2023-06-25T05:15:17.774Z",
-            "update_date": "2023-06-25"
+            "update_date": "2023-07-07"
         }
     },
     {
@@ -43,12 +43,12 @@
         "pk": 23,
         "fields": {
             "name": "Имя 4",
-            "description": "Описание 4: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, consequatur possimus. Debitis, nulla. Deserunt expedita laboriosam officiis odio! Repellat a maiores adipisci rerum sed vero est porro rem ipsa assumenda?",
+            "description": "Описание 4: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, consequatur possimus. Debitis, nulla. Deserunt expedita laboriosam officiis odio! Repellat a maiores adipisci rerum sed vero est porro rem ipsa assumenda2",
             "image_preview": "image_preview/qwe_7oe5V9s.png",
-            "category": 54,
+            "category": 57,
             "price": 64,
             "creation_date": "2023-06-25T05:17:55.171Z",
-            "update_date": "2023-06-25"
+            "update_date": "2023-07-06"
         }
     },
     {
@@ -69,12 +69,21 @@
         "pk": 25,
         "fields": {
             "name": "Имя 6",
-            "description": "4534",
+            "description": "Описание 6: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, consequatur possimus. Debitis, nulla. Deserunt expedita laboriosam officiis odio! Repellat a maiores adipisci rerum sed vero est porro rem ipsa assumenda?",
             "image_preview": "image_preview/qwe_5tt4jiY.png",
             "category": 345,
             "price": 842,
             "creation_date": "2023-06-25T05:18:32.117Z",
-            "update_date": "2023-06-25"
+            "update_date": "2023-07-06"
+        }
+    },
+    {
+        "model": "catalog.contact",
+        "pk": 17,
+        "fields": {
+            "name": "erw",
+            "email": "er",
+            "massage": "wer"
         }
     }
 ]

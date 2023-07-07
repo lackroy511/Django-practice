@@ -1,0 +1,48 @@
+{% extends 'catalog/base.html' %}
+
+{% load format_path_to_image %}
+
+{% block content %}
+
+<div class="container-xxl">
+
+    <div class="row blog">
+        <div class="main blog">
+            <a class="btn btn-primary blog" href={% url 'blog:create' %}>Добавить запись</a>
+            
+            {% for object in object_list %}
+                <div class="card blog">
+                    <div class="card-body blog">
+
+                        <h4 class="title">{{ object.header }}</h4>
+                        <h4 class="title mb-4">slug: {{ object.slug }}</h4>
+
+                        <div class="row">
+
+                            <div class="col">
+                                <img class="entry-preview" src={{ object.image_preview | format_path_to_image }} alt="...">
+                            </div>
+                            <div class="col">
+                                <p>{{ object.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="mb-1">Дата создания: {{ object.creation_date }}</p>
+                    <p class="mb-1">Количество просмотров: {{ object.views_count }}</p>
+
+                    <a class="btn btn-primary blog m-2" href={% url 'blog:entry_detail' object.pk %}>Открыть</a>
+
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

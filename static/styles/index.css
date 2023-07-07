@@ -51,6 +51,18 @@
 
 }
 
+.card.mb-3 {
+    padding: 0;
+}
+
+.col.img>img {
+    height: 180px;
+    
+}
+
+.row.g-0 {
+    height: 180px;
+}
 
 @media (max-width: 840px){
     .row.g-0 {
