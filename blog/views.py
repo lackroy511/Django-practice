@@ -9,6 +9,8 @@ from django.urls import reverse, reverse_lazy
 from django.shortcuts import render
 
 from pytils.translit import slugify
+
+from utils.send_mail import send_mail
 # Create your views here.
 
 
@@ -31,6 +33,10 @@ class BlogEntryDetailView(DetailView):
         self.object = super().get_object(queryset)
         self.object.views_count += 1
         self.object.save()
+        
+        if self.object.views_count == 100:
+            send_mail('Просмотры', 'Количество просмотров 10')
+        
         return self.object
 
 
