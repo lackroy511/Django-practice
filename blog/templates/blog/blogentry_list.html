@@ -1,6 +1,6 @@
 {% extends 'catalog/base.html' %}
 
-{% load format_path_to_image %}
+{% load format_path %}
 
 {% block content %}
 
@@ -20,7 +20,7 @@
                         <div class="row">
 
                             <div class="col">
-                                <img class="entry-preview" src={{ object.image_preview | format_path_to_image }} alt="...">
+                                <img class="entry-preview" src={{ object.image_preview | format_path }} alt="...">
                             </div>
                             <div class="col">
                                 <p>{{ object.content }}</p>

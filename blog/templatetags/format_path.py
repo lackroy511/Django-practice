@@ -5,5 +5,5 @@ register = template.Library()
 
 
 @register.filter()
-def format_path_to_image(text):
+def format_path(text):
     return f'/media/{text}' 
