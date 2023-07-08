@@ -10,7 +10,7 @@
                     <form method="post">
                         {% csrf_token %}
                         <button class="btn btn-warning" type="submit">Удалить</button>
-                        <a class="btn btn-primary blog m-2" href={% url 'blog:entry_detail' object.pk %}>отмена</a>
+                        <a class="btn btn-primary blog m-2" href={% url 'blog:entry_detail' object.slug %}>отмена</a>
                     </form>
                 </div>
             </div>

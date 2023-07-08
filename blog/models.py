@@ -18,4 +18,4 @@ class BlogEntry(models.Model):
     class Meta:
         verbose_name='запись блога'
         verbose_name_plural='записи блога'
-        ordering = ('creation_date', )
+        ordering = ('-creation_date', )

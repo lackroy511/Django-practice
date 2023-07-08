@@ -28,6 +28,7 @@ class BlogEntryListView(ListView):
 
 class BlogEntryDetailView(DetailView):
     model = BlogEntry
+    slug_field = 'slug'
     
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
@@ -60,7 +61,7 @@ class BlogEntryUpdateView(UpdateView):
     fields = ('header', 'image_preview', 'content', )
     
     def get_success_url(self) -> str:
-        return reverse('blog:entry_detail', args=[self.kwargs.get('pk')])
+        return reverse('blog:entry_detail', args=[self.kwargs.get('slug')])
     
 
 class BlogEntryDeleteView(DeleteView):

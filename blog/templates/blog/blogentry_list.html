@@ -31,7 +31,7 @@
                     <p class="mb-1">Дата создания: {{ object.creation_date }}</p>
                     <p class="mb-1">Количество просмотров: {{ object.views_count }}</p>
 
-                    <a class="btn btn-primary blog m-2" href={% url 'blog:entry_detail' object.pk %}>Открыть</a>
+                    <a class="btn btn-primary blog m-2" href={% url 'blog:entry_detail' object.slug %}>Открыть</a>
 
                 </div>
             {% endfor %}
