@@ -22,15 +22,24 @@
                     </div>
                     <div class="mb-1">
                 
-                        
-        
                     </div>
                 </form>
             </div>
 
-            
         </div>
+    </div>
+</div>
 
+<div class="row">
+    <div class="col-12">
+        {% for form in formset.forms %}
+        <div class="card input">
+            <div class="col">
+                {{ formset.management_form }}
+		        {{ form.as_p }}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 
