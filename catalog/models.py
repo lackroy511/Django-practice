@@ -8,7 +8,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name='описание')
     image_preview = models.ImageField(upload_to='image_preview/', 
                                       null=True, blank=True)
-    category = models.BigIntegerField(verbose_name='id категории')
+    category = models.ForeignKey("Category", verbose_name='Категория', on_delete=models.DO_NOTHING)
     price = models.IntegerField(verbose_name='цена')
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name='дата создания', 
                                          null=True, blank=True)

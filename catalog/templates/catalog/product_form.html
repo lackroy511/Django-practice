@@ -2,6 +2,9 @@
 
 {% block content %}
 
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+
 <div class="row add">
     <div class="col">
 
@@ -14,8 +17,7 @@
 
         <div class="card input">
             <div class="col">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
+                
                     <div>
                         {{ form.as_p }}
                         <input class="btn btn-primary" type="submit" value="Сохранить" />
@@ -23,7 +25,7 @@
                     <div class="mb-1">
                 
                     </div>
-                </form>
+                
             </div>
 
         </div>
@@ -42,5 +44,7 @@
         {% endfor %}
     </div>
 </div>
+
+</form>
 
 {% endblock %}

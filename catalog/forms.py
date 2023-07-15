@@ -27,6 +27,8 @@ class ProductForm(forms.ModelForm):
         if data.lower() in self.forbidden_words:
             raise forms.ValidationError(
                 "Название или описание содержит запрещенные слова.")
+        
+        return data
 
 
 class VersionForm(forms.ModelForm):

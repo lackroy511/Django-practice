@@ -22,9 +22,7 @@ class ProductListView(ListView):
     
     def get_queryset(self):
         queryset = super().get_queryset()
-        
-        print(queryset)
-        
+
         return queryset
     
 
