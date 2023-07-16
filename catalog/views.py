@@ -1,9 +1,6 @@
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 
@@ -23,15 +20,24 @@ class ProductListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        for product in queryset:
-            version = product.version_set.all().filter(version_is_active=True).first()
-            product.version = version
+        if self.request.user.is_authenticated:
+            queryset = queryset.filter(user=self.request.user)
+        else:
+            queryset = Product.objects.none
 
+        try:
+            for product in queryset:
+                version = product.version_set.all().filter(version_is_active=True).first()
+                product.version = version
+        except TypeError:
+            return queryset
         return queryset
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
+
+    login_url = reverse_lazy('users:login')
 
 
 class ContactCreateView(CreateView):
@@ -44,10 +50,11 @@ class ContactCreateView(CreateView):
     }
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
 
+    login_url = reverse_lazy('users:login')
     success_url = reverse_lazy('catalog:index')
 
     def get_context_data(self, **kwargs):
@@ -66,6 +73,8 @@ class ProductCreateView(CreateView):
 
     def form_valid(self, form):
 
+        form.instance.user = self.request.user  # Добавил текущего юзера в продукт
+
         formset = self.get_context_data()['formset']
         self.object = form.save()
 
@@ -76,10 +85,11 @@ class ProductCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
 
+    login_url = reverse_lazy('users:login')
     success_url = reverse_lazy('catalog:index')
 
     def get_context_data(self, **kwargs):

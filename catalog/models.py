@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 # Create your models here.
 
 
@@ -14,12 +16,13 @@ class Product(models.Model):
                                          null=True, blank=True)
     update_date = models.DateField(auto_now=True, 
                                    verbose_name='дата изменения')
+    user = models.ForeignKey(User, verbose_name='пользователь', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f'Имя: {self.name}, Цена: {self.price}'
 
     class Meta:
-        verbose_name = 'имя'
+        verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
         ordering = ('price',)
 
