@@ -19,12 +19,15 @@ class ProductListView(ListView):
     extra_context = {
         'is_active_main': 'active'
     }
-    
+
     def get_queryset(self):
         queryset = super().get_queryset()
 
+        for product in queryset:
+            version = product.version_set.all().filter(version_is_active=True).first()
+            product.version = version
+
         return queryset
-    
 
 
 class ProductDetailView(DetailView):
@@ -34,7 +37,7 @@ class ProductDetailView(DetailView):
 class ContactCreateView(CreateView):
     model = Contact
     fields = ('name', 'email', 'massage', )
-     
+
     success_url = reverse_lazy('catalog:contact')
     extra_context = {
         'is_active_contact': 'active'
@@ -43,61 +46,63 @@ class ContactCreateView(CreateView):
 
 class ProductCreateView(CreateView):
     model = Product
-    form_class = ProductForm 
-    
+    form_class = ProductForm
+
     success_url = reverse_lazy('catalog:index')
-    
+
     def get_context_data(self, **kwargs):
-        
+
         context = super().get_context_data(**kwargs)
-        ProductFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
-        
+        ProductFormset = inlineformset_factory(
+            Product, Version, form=VersionForm, extra=1)
+
         if self.request.method == 'POST':
-            context['formset'] = ProductFormset(self.request.POST, instance=self.object)
+            context['formset'] = ProductFormset(
+                self.request.POST, instance=self.object)
         else:
             context['formset'] = ProductFormset(instance=self.object)
-        
+
         return context
-    
-    
+
     def form_valid(self, form):
-        
+
         formset = self.get_context_data()['formset']
         self.object = form.save()
-        
+
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
-        
+
         return super().form_valid(form)
-    
-    
+
+
 class ProductUpdateView(UpdateView):
     model = Product
-    form_class = ProductForm 
-    
+    form_class = ProductForm
+
     success_url = reverse_lazy('catalog:index')
-    
+
     def get_context_data(self, **kwargs):
-        
+
         context = super().get_context_data(**kwargs)
-        ProductFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
-        
+        ProductFormset = inlineformset_factory(
+            Product, Version, form=VersionForm, extra=1)
+
         if self.request.method == 'POST':
-            context['formset'] = ProductFormset(self.request.POST, instance=self.object)
+            context['formset'] = ProductFormset(
+                self.request.POST, instance=self.object)
         else:
             context['formset'] = ProductFormset(instance=self.object)
-        
+
         return context
-    
-    
+
     def form_valid(self, form):
-        
+
         formset = self.get_context_data()['formset']
         self.object = form.save()
-        
+
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
-        
+
         return super().form_valid(form)

@@ -44,3 +44,5 @@ class VersionForm(forms.ModelForm):
             if field_name == 'version_is_active':
                 continue
             field.widget.attrs['class'] = 'form-control'
+
+    
