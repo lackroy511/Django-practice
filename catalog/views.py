@@ -18,7 +18,7 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        
+
         if self.request.user.is_authenticated:
             queryset = queryset.filter(user=self.request.user)
         else:

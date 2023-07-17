@@ -1,0 +1,21 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col login">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card">
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary mb-3">Сохранить</button>
+                <a class="btn btn-primary" href={% url 'users:gen_new_pass' %}>Новый пароль отправить на почту</a>
+            </div>
+        </form>
+    
+    </div>
+</div>
+
+
+
+{% endblock  %}

@@ -1,17 +1,16 @@
 
-
-from django.contrib.auth.tokens import default_token_generator
+import random
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, TemplateView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, TemplateView, UpdateView
 
-from users.forms import UserRegisterForm
+from users.forms import UserForm, UserRegisterForm
 
 from users.models import User
 
@@ -51,6 +50,26 @@ class RegisterUser(CreateView):
         send_mail(mail_subject, massage, 'djang5111@gmail.com', [user.email])
 
         return super().form_valid(form)
+
+
+class UserUpdateView(UpdateView):
+    model = User
+    success_url = reverse_lazy('users:profile')
+    form_class = UserForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+def gen_new_pass(request):
+
+    new_password = str(random.randint(1000, 9999))
+    request.user.set_password(new_password)
+    request.user.save()
+    send_mail('Ваш пароль изменен',
+              f"Ваш пароль: {new_password}", 'djang5111@gmail.com', [request.user.email])
+
+    return redirect('catalog:index')
 
 
 def activate_account(request, uidb64):
