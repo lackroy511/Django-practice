@@ -1,5 +1,6 @@
-
+import jwt
 import random
+from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
@@ -29,15 +30,20 @@ class RegisterUser(CreateView):
 
     def form_valid(self, form):
 
-        user = form.save()
+        user = form.save(commit=False)
+        user.is_active = False  # User will be activated after email verification
+        user.save()
 
-        # Закодировать id пользователя
+        # Сформировать токен
         uid = urlsafe_base64_encode(force_bytes(user.pk))
-
+        payload = {'user_id': user.pk}
+        secret_key = user.email
+        token = jwt.encode(payload, secret_key, algorithm='HS256')
+        
         # Создание ссылки
         current_site = get_current_site(self.request)
         activation_link = reverse_lazy(
-            'users:activate_account', kwargs={'uidb64': uid})
+            'users:activate_account', kwargs={'uidb64': uid, 'token': token})
         activation_url = f"{current_site}{activation_link}"
 
         # Данные для письма
@@ -52,6 +58,26 @@ class RegisterUser(CreateView):
         return super().form_valid(form)
 
 
+def activate_account(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=int(uid))
+    except User.DoesNotExist:
+        return redirect('users:activation_failed')
+    
+    try:
+        decoded_token = jwt.decode(token, user.email, algorithms=['HS256'])
+    except jwt.InvalidTokenError:
+        return redirect('users:activation_failed')
+    
+    if decoded_token['user_id'] == user.pk:
+        user.is_active = True
+        user.save()
+        return redirect('users:activation_success')
+    else:
+        return redirect('users:activation_failed')
+    
+    
 class UserUpdateView(UpdateView):
     model = User
     success_url = reverse_lazy('users:profile')
@@ -70,17 +96,6 @@ def gen_new_pass(request):
               f"Ваш пароль: {new_password}", 'djang5111@gmail.com', [request.user.email])
 
     return redirect('catalog:index')
-
-
-def activate_account(request, uidb64):
-    try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=int(uid))
-        user.is_active = True
-        user.save()
-        return redirect('users:activation_success')
-    except User.DoesNotExist:
-        return redirect('users:activation_failed')
 
 
 class ActivationSuccess(TemplateView):

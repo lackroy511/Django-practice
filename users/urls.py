@@ -15,7 +15,7 @@ urlpatterns = [
     path("profile/", UserUpdateView.as_view(), name="profile"),
     path("gen_new_pass/", gen_new_pass, name="gen_new_pass"),
 
-    path('activate/<str:uidb64>/', activate_account, name='activate_account'),
+    path('activate/<str:uidb64>/<str:token>', activate_account, name='activate_account'),
     path('success', ActivationSuccess.as_view(), name='activation_success'),
     path('failed', ActivationFailed.as_view(), name='activation_failed')
 
