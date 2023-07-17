@@ -3,7 +3,6 @@ from django.forms import inlineformset_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
-
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Contact, Version
 
@@ -19,7 +18,7 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-
+        
         if self.request.user.is_authenticated:
             queryset = queryset.filter(user=self.request.user)
         else:
