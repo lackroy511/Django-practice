@@ -1,18 +1,24 @@
+from django.contrib.auth.forms import AuthenticationForm
 from typing import Any
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from users.models import User
+from catalog.forms import StylesMixin
 
 
-class UserRegisterForm(UserCreationForm):
+class UserLoginForm(StylesMixin, AuthenticationForm):
+    pass
+
+
+class UserRegisterForm(StylesMixin, UserCreationForm):
 
     class Meta:
         model = User
         fields = ('email', 'password1', 'password2',)
 
 
-class UserForm(UserChangeForm):
+class UserForm(StylesMixin, UserChangeForm):
 
     class Meta:
         model = User

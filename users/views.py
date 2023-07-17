@@ -10,12 +10,19 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView, UpdateView
+from django.contrib.auth.views import LoginView
 
-from users.forms import UserForm, UserRegisterForm
+from users.forms import UserForm, UserRegisterForm, UserLoginForm
 
 from users.models import User
 
 # Create your views here.
+
+
+class UserLoginView(LoginView):
+    
+    form_class = UserLoginForm
+    template_name = 'user/login.html'
 
 
 class RegisterUser(CreateView):
