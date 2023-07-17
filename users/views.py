@@ -37,15 +37,13 @@ class RegisterUser(CreateView):
 
     def form_valid(self, form):
 
-        user = form.save(commit=False)
-        user.is_active = False  # User will be activated after email verification
-        user.save()
+        user = form.save()        
 
         # Сформировать токен
         uid = urlsafe_base64_encode(force_bytes(user.pk))
-        payload = {'user_id': user.pk}
+        user_id = {'user_id': user.pk}
         secret_key = user.email
-        token = jwt.encode(payload, secret_key, algorithm='HS256')
+        token = jwt.encode(user_id, secret_key, algorithm='HS256')
         
         # Создание ссылки
         current_site = get_current_site(self.request)
@@ -73,7 +71,8 @@ def activate_account(request, uidb64, token):
         return redirect('users:activation_failed')
     
     try:
-        decoded_token = jwt.decode(token, user.email, algorithms=['HS256'])
+        secret_key = user.email
+        decoded_token = jwt.decode(token, secret_key, algorithms=['HS256'])
     except jwt.InvalidTokenError:
         return redirect('users:activation_failed')
     
