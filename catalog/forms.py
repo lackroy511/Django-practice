@@ -1,7 +1,7 @@
 from typing import Any, Dict
 from django import forms
 
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Contact
 
 class StylesMixin:
     def __init__(self, *args, **kwargs):
@@ -36,4 +36,11 @@ class VersionForm(StylesMixin, forms.ModelForm):
 
     class Meta:
         model = Version
+        fields = '__all__'
+        
+
+class ContactForm(StylesMixin, forms.ModelForm):
+        
+    class Meta:
+        model = Contact
         fields = '__all__'

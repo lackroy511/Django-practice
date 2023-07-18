@@ -15,6 +15,7 @@
     <link rel="stylesheet" href={% static 'styles/product_detail.css' %}>
     <link rel="stylesheet" href={% static 'styles/blogentry_list.css' %}>
     <link rel="stylesheet" href={% static 'styles/blogentry_form.css' %}>
+    <link rel="stylesheet" href={% static 'styles/login.css' %}>
     <title>Document</title>
 </head>
 <body>
@@ -49,7 +50,7 @@
                     {% if user.is_authenticated %}
                         
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href={% url 'users:profile' %}>Профиль</a>
+                            <a class="nav-link {{ is_active_profile }}" aria-current="page" href={% url 'users:profile' %}>Профиль</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href={% url 'users:logout' %}>Выход</a>

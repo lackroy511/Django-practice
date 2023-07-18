@@ -88,6 +88,9 @@ class UserUpdateView(UpdateView):
     model = User
     success_url = reverse_lazy('users:profile')
     form_class = UserForm
+    extra_context = {
+        'is_active_profile': 'active'
+    }
 
     def get_object(self, queryset=None):
         return self.request.user

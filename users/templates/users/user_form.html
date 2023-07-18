@@ -2,14 +2,19 @@
 
 {% block content %}
 
+<div class="row title-profile">
+    <div class="text-title">
+        <h1>Данные вашего профиля</h1>
+    </div>
+</div>
+
 <div class="row">
     <div class="col login">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post">
             {% csrf_token %}
-            <div class="card">
+            <div class="card profile">
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-primary mb-3">Сохранить</button>
-                <a class="btn btn-primary" href={% url 'users:gen_new_pass' %}>Новый пароль отправить на почту</a>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
             </div>
         </form>
     

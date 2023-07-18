@@ -3,7 +3,7 @@ from django.forms import inlineformset_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ContactForm
 from catalog.models import Product, Contact, Version
 
 
@@ -41,8 +41,7 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
 
 class ContactCreateView(CreateView):
     model = Contact
-    fields = ('name', 'email', 'massage', )
-
+    form_class = ContactForm
     success_url = reverse_lazy('catalog:contact')
     extra_context = {
         'is_active_contact': 'active'
