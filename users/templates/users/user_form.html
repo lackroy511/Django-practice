@@ -14,7 +14,8 @@
             {% csrf_token %}
             <div class="card profile">
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Сохранить</button>
+                <button type="submit" class="btn btn-primary mb-3">Сохранить</button>
+                <a href="{% url 'users:gen_new_pass' %}" class="btn btn-warning">Сбросить пароль и отправить новый пароль на почту</a>
             </div>
         </form>
     
