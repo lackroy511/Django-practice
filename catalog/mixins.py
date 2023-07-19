@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 
 
 class OwnerCheckMixin:
-
+    
     def dispatch(self, request, *args, **kwargs):
 
         object = self.get_object()
