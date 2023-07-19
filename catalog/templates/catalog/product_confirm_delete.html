@@ -1,0 +1,28 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<div class="row title-main">
+    <div class="text-title">
+        <h1>Подтвердите удаление продукта</h1>
+    </div>
+</div>
+
+{% if perms.catalog.delete_product %}
+
+<div class="row">
+    <div class="col login">
+        <form method="post">
+            {% csrf_token %}
+            <div class="card login">
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-danger mb-3">Удалить</button>
+                <a href="{% url 'catalog:product' object.pk %}" class="btn btn-primary">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock  %}

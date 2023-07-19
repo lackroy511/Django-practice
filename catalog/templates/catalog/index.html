@@ -13,11 +13,12 @@
 </div>
 
 <div class="row">
-
-    <div class="col-12 mb-3">
-        <a class="btn btn-secondary" href={% url 'catalog:create_product' %}>Добавить продукт</a>
-    </div>
-
+    {% if perms.catalog.add_product %}
+        <div class="col-12 mb-3">
+            <a class="btn btn-secondary" href={% url 'catalog:create_product' %}>Добавить продукт</a>
+        </div>
+    {% endif %}
+    
     {% for object in object_list %}
     <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6 col-sm-12">
         <div class="card mb-3" style="max-width: 540px;">
@@ -26,18 +27,23 @@
                     <img src={{ object.image_preview | format_path_to_image }} class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-8">
-                    <div class="card-body">
+                    <div class="card-body preview">
                         <h5 class="card-title">{{ object.name }}</h5>
-                        <p class="card-text">{{ object.description | character_limit }} </p>
+                        <p class="card-text desc">{{ object.description | character_limit }} </p>
                         <p class="card-text">{{ object.version.version_name }} </p>
-
-                    </div>
-                    <div class="button">
-                
-                        <a class="detail" type="submit" href={% url 'catalog:product' object.pk %}><p>Подробнее...</p></a>
-                            
                         
                     </div>
+                    <div class="is_published ">
+                        {% if object.is_published %}
+                            <p class="card-text">&#9989; Опубликован</p>
+                        {% else %}
+                            <p class="card-text">&#10060; Не опубликован</p>
+                        {% endif %}
+                    </div>
+                    <div class="button">
+                        <a class="detail" href={% url 'catalog:product' object.pk %}><p>Подробнее...</p></a>
+                    </div>
+                    
                 </div>
             </div>
         </div>

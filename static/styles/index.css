@@ -30,6 +30,11 @@
 .detail {
     text-decoration: none;
     color: rgb(109, 104, 104);
+    display: flex;
+}
+
+.detail p{
+    margin-bottom: 0;
 }
 
 .detail:hover {
@@ -63,6 +68,17 @@
 .row.g-0 {
     height: 180px;
 }
+
+.card-body.preview {
+    padding-bottom: 0;
+    min-height: 7.8rem;
+}
+
+.is_published p {
+    display: block;
+    margin-left: 1rem;
+}
+
 
 @media (max-width: 840px){
     .row.g-0 {

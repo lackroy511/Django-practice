@@ -19,6 +19,8 @@ class Product(models.Model):
                                    verbose_name='дата изменения')
     user = models.ForeignKey(User, verbose_name='пользователь',
                              on_delete=models.CASCADE, null=True, blank=True)
+    is_published = models.BooleanField(
+        default=False, verbose_name='опубликовано')
 
     def __str__(self):
         return f'Имя: {self.name}, Цена: {self.price}'

@@ -1,9 +1,12 @@
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
-from catalog.forms import ProductForm, VersionForm, ContactForm
+from catalog.forms import ProductForm, VersionForm, ContactForm, ProductForModeratorForm, \
+    ProductForAdminForm
+from catalog.mixins import OwnerCheckMixin
 from catalog.models import Product, Contact, Version
 
 
@@ -17,26 +20,38 @@ class ProductListView(ListView):
     }
 
     def get_queryset(self):
+
         queryset = super().get_queryset()
 
-        if self.request.user.is_authenticated:
-            queryset = queryset.filter(user=self.request.user)
-        else:
+        if self.request.user.is_staff:
+            pass
+        elif not self.request.user.is_authenticated:
             queryset = Product.objects.none
+        elif self.request.user.is_authenticated:
+            queryset = queryset.filter(user=self.request.user)
 
         try:
             for product in queryset:
                 version = product.version_set.all().filter(version_is_active=True).first()
                 product.version = version
         except TypeError:
-            return queryset
+            pass
+
         return queryset
 
 
-class ProductDetailView(LoginRequiredMixin, DetailView):
+class ProductDetailView(LoginRequiredMixin, PermissionRequiredMixin, OwnerCheckMixin, DetailView):
     model = Product
-
+    permission_required = 'catalog.view_product'
     login_url = reverse_lazy('users:login')
+
+    def dispatch(self, request, *args, **kwargs):
+
+        object = self.get_object()
+        if object.user != self.request.user and not self.request.user.is_staff:
+            return redirect('catalog:index')
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class ContactCreateView(CreateView):
@@ -48,9 +63,10 @@ class ContactCreateView(CreateView):
     }
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
+    permission_required = 'catalog.add_product'
 
     login_url = reverse_lazy('users:login')
     success_url = reverse_lazy('catalog:index')
@@ -83,12 +99,22 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, OwnerCheckMixin, UpdateView):
     model = Product
-    form_class = ProductForm
+    permission_required = 'catalog.change_product'
 
     login_url = reverse_lazy('users:login')
     success_url = reverse_lazy('catalog:index')
+
+    def get_form_class(self):
+
+        if self.request.user.is_staff:
+            return ProductForModeratorForm
+
+        if self.request.user.is_superuser:
+            return ProductForAdminForm
+
+        return ProductForm
 
     def get_context_data(self, **kwargs):
 
@@ -96,11 +122,12 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         ProductFormset = inlineformset_factory(
             Product, Version, form=VersionForm, extra=1)
 
-        if self.request.method == 'POST':
-            context['formset'] = ProductFormset(
-                self.request.POST, instance=self.object)
-        else:
-            context['formset'] = ProductFormset(instance=self.object)
+        if not self.request.user.groups.filter(name='Moderators').exists():
+            if self.request.method == 'POST':
+                context['formset'] = ProductFormset(
+                    self.request.POST, instance=self.object)
+            else:
+                context['formset'] = ProductFormset(instance=self.object)
 
         return context
 
@@ -114,4 +141,18 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             formset.save()
 
         return super().form_valid(form)
-    
+
+    def dispatch(self, request, *args, **kwargs):
+
+        object = self.get_object()
+        if object.user != self.request.user and not self.request.user.is_staff:
+            return redirect('catalog:index')
+
+        return super().dispatch(request, *args, **kwargs)
+
+
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, OwnerCheckMixin, DeleteView):
+
+    model = Product
+    permission_required = 'catalog.delete_product'
+    success_url = reverse_lazy('catalog:index')
