@@ -102,7 +102,6 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, OwnerCheckM
 
         if self.request.user.is_staff:
             return ProductForModeratorForm
-
         if self.request.user.is_superuser:
             return ProductForAdminForm
 
@@ -114,7 +113,7 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, OwnerCheckM
         ProductFormset = inlineformset_factory(
             Product, Version, form=VersionForm, extra=1)
 
-        if not self.request.user.groups.filter(name='Moderators').exists():
+        if not self.request.user.is_staff:
             if self.request.method == 'POST':
                 context['formset'] = ProductFormset(
                     self.request.POST, instance=self.object)
