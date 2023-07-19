@@ -45,14 +45,6 @@ class ProductDetailView(LoginRequiredMixin, PermissionRequiredMixin, OwnerCheckM
     permission_required = 'catalog.view_product'
     login_url = reverse_lazy('users:login')
 
-    def dispatch(self, request, *args, **kwargs):
-
-        object = self.get_object()
-        if object.user != self.request.user and not self.request.user.is_staff:
-            return redirect('catalog:index')
-
-        return super().dispatch(request, *args, **kwargs)
-
 
 class ContactCreateView(CreateView):
     model = Contact
@@ -141,14 +133,6 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, OwnerCheckM
             formset.save()
 
         return super().form_valid(form)
-
-    def dispatch(self, request, *args, **kwargs):
-
-        object = self.get_object()
-        if object.user != self.request.user and not self.request.user.is_staff:
-            return redirect('catalog:index')
-
-        return super().dispatch(request, *args, **kwargs)
 
 
 class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, OwnerCheckMixin, DeleteView):
