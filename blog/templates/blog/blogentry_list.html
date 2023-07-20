@@ -8,17 +8,18 @@
 
     <div class="row blog">
         <div class="main blog">
-            <a class="btn btn-primary blog" href={% url 'blog:create' %}>Добавить запись</a>
-            
+            {% if perms.blog.create_blogentry %}
+                <a class="btn btn-primary blog" href={% url 'blog:create' %}>Добавить запись</a>
+            {% endif %}
             {% for object in object_list %}
                 <div class="card blog">
-                    <div class="card-body blog">
 
+                    <div class="card-header blog">
                         <h4 class="title">{{ object.header }}</h4>
-                        <h4 class="title mb-4">slug: {{ object.slug }}</h4>
-
+                    </div>
+                    
+                    <div class="card-body blog">
                         <div class="row">
-
                             <div class="col">
                                 <img class="entry-preview" src={{ object.image_preview | format_path }} alt="...">
                             </div>
@@ -27,11 +28,12 @@
                             </div>
                         </div>
                     </div>
-
-                    <p class="mb-1">Дата создания: {{ object.creation_date }}</p>
-                    <p class="mb-1">Количество просмотров: {{ object.views_count }}</p>
-
-                    <a class="btn btn-primary blog m-2" href={% url 'blog:entry_detail' object.slug %}>Открыть</a>
+                    
+                    <div class="card-footer blog">
+                        <p class="mb-1">Дата создания: {{ object.creation_date }}</p>
+                        <p class="mb-1">Количество просмотров: {{ object.views_count }}</p>
+                        <a class="btn btn-primary blog m-2" href={% url 'blog:entry_detail' object.slug %}>Открыть</a>
+                    </div>
 
                 </div>
             {% endfor %}

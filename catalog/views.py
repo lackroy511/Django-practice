@@ -100,10 +100,10 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, OwnerCheckM
 
     def get_form_class(self):
 
-        if self.request.user.is_staff:
-            return ProductForModeratorForm
         if self.request.user.is_superuser:
             return ProductForAdminForm
+        if self.request.user.is_staff:
+            return ProductForModeratorForm
 
         return ProductForm
 

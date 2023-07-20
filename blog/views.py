@@ -1,16 +1,14 @@
-from django.forms.models import BaseModelForm
+from utils.send_mail import send_mail
 
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
+from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from blog.models import BlogEntry
+from blog.forms import BlogEntryForm
+from blog.mixins import SlugifyMixin
 
-from django.urls import reverse, reverse_lazy
-
-from django.shortcuts import render
-
-from pytils.translit import slugify
-
-from utils.send_mail import send_mail
 # Create your views here.
 
 
@@ -22,7 +20,7 @@ class BlogEntryListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(is_publish=True)
+        queryset = queryset.filter(is_published=True)
         return queryset
 
 
@@ -41,29 +39,23 @@ class BlogEntryDetailView(DetailView):
         return self.object
 
 
-class BlogEntryCreateView(CreateView):
+class BlogEntryCreateView(PermissionRequiredMixin, SlugifyMixin, CreateView):
     model = BlogEntry
-    fields = ('header', 'image_preview', 'content', )
+    form_class = BlogEntryForm
+    permission_required = 'blog.add_blogentry'
     success_url = reverse_lazy('blog:blog')
 
-    def form_valid(self, form: BaseModelForm):
 
-        if form.is_valid():
-            new_entry = form.save()
-            new_entry.slug = slugify(new_entry.header)
-            new_entry = form.save()
-
-        return super().form_valid(form)
-    
-
-class BlogEntryUpdateView(UpdateView):
+class BlogEntryUpdateView(PermissionRequiredMixin, SlugifyMixin, UpdateView):
     model = BlogEntry
-    fields = ('header', 'image_preview', 'content', )
+    form_class = BlogEntryForm
+    permission_required = 'blog.change_blogentry'
     
     def get_success_url(self) -> str:
-        return reverse('blog:entry_detail', args=[self.kwargs.get('slug')])
+        return reverse('blog:entry_detail', args=[self.object.slug])
     
 
-class BlogEntryDeleteView(DeleteView):
+class BlogEntryDeleteView(PermissionRequiredMixin, DeleteView):
     model = BlogEntry
     success_url = reverse_lazy('blog:blog')
+    permission_required = 'blog.delete_blogentry'

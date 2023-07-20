@@ -9,29 +9,36 @@
     <div class="row blog">
         <div class="main blog">
             
-                <div class="card blog">
-                    <div class="card-body blog">
+            <div class="card blog">
 
-                        <h4 class="title">{{ object.header }}</h4>
-                        <h4 class="title mb-4">slug: {{ object.slug }}</h4>
-
-                        <div class="row">
-
-                            <div class="col">
-                                <img class="entry-preview" src={{ object.image_preview | format_path }} alt="...">
-                            </div>
-                            <div class="col">
-                                <p>{{ object.content }}</p>
-                            </div>
+                <div class="card-header blog">
+                    <h4 class="title">{{ object.header }}</h4>
+                </div>
+                
+                <div class="card-body blog">
+                    <div class="row">
+                        <div class="col">
+                            <img class="entry-preview" src={{ object.image_preview | format_path }} alt="...">
+                        </div>
+                        <div class="col">
+                            <p>{{ object.content }}</p>
                         </div>
                     </div>
-
+                </div>
+                
+                <div class="card-footer blog">
                     <p class="mb-1">Дата создания: {{ object.creation_date }}</p>
                     <p class="mb-1">Количество просмотров: {{ object.views_count }}</p>
+                    {% if perms.blog.change_blogentry %}
+                        <a class="btn btn-primary blog m-2" href={% url 'blog:entry_update' object.slug %}>Изменить</a>
+                    {% endif %}
+                    {% if perms.blog.delete_blogentry %}
+                        <a class="btn btn-danger blog m-2" href={% url 'blog:entry_delete' object.slug %}>Удалить</a>
+                    {% endif %}
+                    
+                </div>
 
-                    <a class="btn btn-primary blog m-2" href={% url 'blog:entry_update' object.slug %}>Изменить</a>
-                    <a class="btn btn-primary blog m-2" href={% url 'blog:entry_delete' object.slug %}>Удалить</a>
-
+                    
                 </div>
 
         </div>
@@ -40,3 +47,10 @@
 </div>
 
 {% endblock  %}
+
+
+<p class="mb-1">Дата создания: {{ object.creation_date }}</p>
+<p class="mb-1">Количество просмотров: {{ object.views_count }}</p>
+
+<a class="btn btn-primary blog m-2" href={% url 'blog:entry_update' object.slug %}>Изменить</a>
+<a class="btn btn-primary blog m-2" href={% url 'blog:entry_delete' object.slug %}>Удалить</a>
