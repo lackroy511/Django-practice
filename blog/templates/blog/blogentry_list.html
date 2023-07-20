@@ -8,7 +8,7 @@
 
     <div class="row blog">
         <div class="main blog">
-            {% if perms.blog.create_blogentry %}
+            {% if perms.blog.add_blogentry %}
                 <a class="btn btn-primary blog" href={% url 'blog:create' %}>Добавить запись</a>
             {% endif %}
             {% for object in object_list %}

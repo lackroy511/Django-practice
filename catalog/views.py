@@ -23,7 +23,7 @@ class ProductListView(ListView):
 
         queryset = super().get_queryset()
 
-        if self.request.user.is_staff:
+        if self.request.user.is_staff and self.request.user.groups.filter(name='Moderators').exists():
             pass
         elif not self.request.user.is_authenticated:
             queryset = Product.objects.none

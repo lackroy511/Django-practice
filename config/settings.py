@@ -11,11 +11,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
-
+from dotenv import load_dotenv
 from pathlib import Path
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+dot_env_path = os.path.join(BASE_DIR, '.env')
+load_dotenv(dotenv_path=dot_env_path)
 
 
 # Quick-start development settings - unsuitable for production
@@ -82,9 +87,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_project_db',
-        'USER': 'debian',
-        'PASSWORD': '352622',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -149,7 +154,7 @@ LOGIN_URL = '/users/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # SMTP-сервер для вашего почтового провайдера
 EMAIL_PORT = 587  # Порт SMTP-сервера
-EMAIL_HOST_USER = 'djang5111@gmail.com'  # Ваш адрес электронной почты
-EMAIL_HOST_PASSWORD = os.getenv('GMAIL_APP_PASS')  # Пароль от вашей электронной почты
 EMAIL_USE_TLS = True  # Использовать TLS для безопасного подключения
-DEFAULT_FROM_EMAIL = 'djang5111@gmail.com'  # Адрес, от имени которого будет отправлено письмо
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Ваш адрес электронной почты
+EMAIL_HOST_PASSWORD = os.getenv('GMAIL_APP_PASS')  # Пароль от вашей электронной почты
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')  # Адрес, от имени которого будет отправлено письмо
