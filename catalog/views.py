@@ -7,7 +7,7 @@ from catalog.forms import ProductForm, VersionForm, ContactForm
 from catalog.mixins import OwnerCheckMixin, CacheViewMixin
 from catalog.models import Product, Contact, Version, Category
 
-from catalog.services import category_selection, filter_products_by_owner, set_active_version_for_products, \
+from catalog.services import cache_category, filter_products_by_owner, set_active_version_for_products, \
     create_formset_for_product, save_formset_data_for_product, choose_form_for_model
 from config.settings import CACHE_ENABLED
 
@@ -100,17 +100,8 @@ class CategoryListView(ListView):
     }
     
     def get_queryset(self):
-        if CACHE_ENABLED:
-            key = 'category_list'
-            queryset = cache.get(key)
-            if queryset is None:
-                queryset = super().get_queryset()
-                cache.set(key, queryset, 60)
-        else:
-            queryset = super().get_queryset()
+        return cache_category()
         
-        queryset = category_selection(queryset)
-        
-        return queryset
+    
     
     

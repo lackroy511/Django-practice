@@ -1,13 +1,21 @@
 from django.core.cache import cache
 from django.forms import inlineformset_factory
+from catalog.models import Category
 
 
 from catalog.forms import ProductForAdminForm, ProductForModeratorForm, ProductForm
 from config.settings import CACHE_ENABLED
 
-def category_selection(queryset: object) -> object:
-    return queryset.all()
-
+def cache_category() -> object:
+    if CACHE_ENABLED:
+        key = 'category_list'
+        queryset = cache.get(key)
+        if queryset is None:
+            queryset = Category.objects.all()
+            cache.set(key, queryset, 60)
+    else:
+        queryset = Category.objects.all()
+    return queryset
 
 def filter_products_by_owner(self, queryset: object, Product: object) -> object:
 
