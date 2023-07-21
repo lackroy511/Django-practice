@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.filter()
 def character_limit(text):
-    if len(text) > 70:
-        return text[0:68] + '...'
+    if len(text) > 20:
+        return text[0:20] + '...'
     else:
         return text

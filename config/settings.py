@@ -90,8 +90,8 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT'),
     }
 }
 
@@ -152,9 +152,19 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/users/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # SMTP-сервер для вашего почтового провайдера
-EMAIL_PORT = 587  # Порт SMTP-сервера
-EMAIL_USE_TLS = True  # Использовать TLS для безопасного подключения
+EMAIL_HOST = os.getenv('EMAIL_HOST')  # SMTP-сервер для вашего почтового провайдера
+EMAIL_PORT = os.getenv('EMAIL_PORT')  # Порт SMTP-сервера
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')  # Использовать TLS для безопасного подключения
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Ваш адрес электронной почты
 EMAIL_HOST_PASSWORD = os.getenv('GMAIL_APP_PASS')  # Пароль от вашей электронной почты
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')  # Адрес, от имени которого будет отправлено письмо
+
+CACHE_ENABLED = os.getenv('CACHE_ENABLED') == 'True'
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache", 
+            "LOCATION": "redis://127.0.0.1:6379",  
+        }
+    }

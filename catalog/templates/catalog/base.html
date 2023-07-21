@@ -16,6 +16,7 @@
     <link rel="stylesheet" href={% static 'styles/blogentry_list.css' %}>
     <link rel="stylesheet" href={% static 'styles/blogentry_form.css' %}>
     <link rel="stylesheet" href={% static 'styles/login.css' %}>
+    <link rel="stylesheet" href={% static 'styles/category.css' %}>
     <title>Document</title>
 </head>
 <body>
@@ -35,7 +36,7 @@
                         <a class="nav-link {{ is_active_main }}" aria-current="page" href={% url 'catalog:index' %}>Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ is_active_categories }}" aria-current="page" href="#">Категории</a>
+                        <a class="nav-link {{ is_active_categories }}" aria-current="page" href={% url 'catalog:category' %}>Категории</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ is_active_blog }}" href={% url 'blog:blog' %}>Блог</a>

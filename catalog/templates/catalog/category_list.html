@@ -1,0 +1,48 @@
+{% extends 'catalog/base.html' %}
+
+{% load character_limit %}
+{% block content %}
+
+<div class="row title">
+    <div class="text-title">
+        <h1>Категории</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div style="margin-inline: 20%;">
+            <a href="#" class="btn btn-primary mb-3">Добавить категорию</a>
+            <table class="table mb-0 table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Категория</th>
+                        <th scope="col">Описание</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in object_list %}
+                    <tr>
+                        <th scope="row">{{ object.name }}</th>
+                        <td>{{ object.description|character_limit }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                <button type="button" class="btn btn-outline-primary">
+                                    <a class="user-action" href="#">Ред.</a>
+                                </button>
+                                <button type="button" class="btn btn-outline-primary">
+                                    <a class="user-action" href="#">Удалить</a>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}

@@ -1,13 +1,15 @@
 from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 
 class OwnerCheckMixin:
-    
     def dispatch(self, request, *args, **kwargs):
 
         object = self.get_object()
         if object.user != self.request.user and not self.request.user.is_staff \
-                                            and not self.request.user.is_superuser:
+                                            and not self.request.user.is_superuser \
+                                            and not self.request.user.groups.filter(name='Moderators').exists():
             return redirect('catalog:index')
 
         return super().dispatch(request, *args, **kwargs)
@@ -23,3 +25,9 @@ class StylesMixin:
             if field_name == 'is_published':
                 continue
             field.widget.attrs['class'] = 'form-control'
+
+
+class CacheViewMixin:
+    @method_decorator(cache_page(30))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
