@@ -1,5 +1,5 @@
 #### Настроить .env
-#### После клонирования репозитория и установки зависимостей выполнить в терминале:
+#### Выполнить в терминале:
 - создать БД
 - `python manage.py migrate`
 - `python manage.py loaddata fixtures/full_data.json`
