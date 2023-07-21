@@ -7,9 +7,9 @@ class OwnerCheckMixin:
     def dispatch(self, request, *args, **kwargs):
 
         object = self.get_object()
-        if object.user != self.request.user and not self.request.user.is_staff \
-                                            and not self.request.user.is_superuser \
-                                            and not self.request.user.groups.filter(name='Moderators').exists():
+        if object.user != self.request.user and not self.request.user.groups.filter(name='Moderator').exists() \
+                                            and not self.request.user.is_superuser:
+                                            
             return redirect('catalog:index')
 
         return super().dispatch(request, *args, **kwargs)

@@ -8,7 +8,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         
         user = User.objects.create(
-            email='debian@gmail.com',
+            email='admin@admin.com',
             first_name='admin',
             last_name='admin',
             is_staff=True,
@@ -16,5 +16,5 @@ class Command(BaseCommand):
             is_active=True
         )
 
-        user.set_password('1')
+        user.set_password('admin')
         user.save()

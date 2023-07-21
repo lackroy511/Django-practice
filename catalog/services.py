@@ -5,13 +5,13 @@ from django.forms import inlineformset_factory
 from catalog.forms import ProductForAdminForm, ProductForModeratorForm, ProductForm
 from config.settings import CACHE_ENABLED
 
-def category_selection(queryset):
+def category_selection(queryset: object) -> object:
     return queryset.all()
 
 
 def filter_products_by_owner(self, queryset: object, Product: object) -> object:
 
-    if self.request.user.groups.filter(name='Moderators').exists():
+    if self.request.user.groups.filter(name='Moderator').exists():
         pass
     elif not self.request.user.is_authenticated:
         queryset = Product.objects.none
@@ -35,7 +35,7 @@ def create_formset_for_product(self, context: dict, Product: object, Version: ob
     ProductFormset = inlineformset_factory(
             Product, Version, form=VersionForm, extra=1)
 
-    if not self.request.user.groups.filter(name='Moderators').exists():
+    if not self.request.user.groups.filter(name='Moderator').exists():
         if self.request.method == 'POST':
             context['formset'] = ProductFormset(
                 self.request.POST, instance=self.object)
@@ -57,10 +57,10 @@ def save_formset_data_for_product(self, form) -> None:
         pass
     
 
-def choose_form_for_model(self):
+def choose_form_for_model(self) -> object:
     if self.request.user.is_superuser:
         return ProductForAdminForm
-    if self.request.user.groups.filter(name='Moderators').exists():
+    if self.request.user.groups.filter(name='Moderator').exists():
         return ProductForModeratorForm
 
     return ProductForm

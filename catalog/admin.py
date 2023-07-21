@@ -25,3 +25,5 @@ class ContactAdmin(admin.ModelAdmin):
 @admin.register(Version)
 class VersionAdmin(admin.ModelAdmin):
     list_display = ('product', 'version_number', 'version_name', 'version_is_active', )
+    
+    

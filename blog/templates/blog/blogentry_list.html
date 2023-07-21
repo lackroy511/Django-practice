@@ -12,7 +12,7 @@
                 <a class="btn btn-primary blog" href={% url 'blog:create' %}>Добавить запись</a>
             {% endif %}
             {% for object in object_list %}
-                <div class="card blog">
+                <div class="card blog mb-5">
 
                     <div class="card-header blog">
                         <h4 class="title">{{ object.header }}</h4>
